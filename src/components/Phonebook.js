@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./Phonebook.module.css";
+import "./Phonebook.scss";
 // import { parse as uuidParse } from "uuid";
 const { v4: uuidv4 } = require("uuid");
 
@@ -11,33 +11,30 @@ class Phonebook extends Component {
     number: "",
     filter: "",
   };
+
   handleChange = (e) => {
     const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+    this.setState(() => {
+      this.state.contacts.map((el) => {
+        if (value === el.name) {
+          return alert(`${value} is already in contacts`);
+        }
+      });
+    });
+    return this.setState({ [name]: value });
   };
-  contactsData = (e) => {
+  toSaveContacts = (e) => {
     const { contacts, name, number } = this.state;
+
     this.setState({
       [contacts]: contacts.push({
         id: uuidv4(),
         name: name,
         number: number,
+        filter: "",
       }),
     });
   };
-  deleteContact = (e) => {
-    const { contacts } = this.state;
-    this.setState(() => {
-      // console.log(this.state.contacts);
-      contacts.map((el) => {
-        // console.log(el.name);
-        if (e.target.parentNode === el.name) {
-          console.log(el.name, "name");
-        }
-      });
-    });
-  };
-
   onSaveData = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state); // отпарвка данных
@@ -47,25 +44,52 @@ class Phonebook extends Component {
   reset = () => {
     this.setState({ name: "", number: "" });
   };
+
   onFilterChange = (e) => {
     this.setState({ filter: e.currentTarget.value });
+  };
+  visibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizeFilter = filter.toLowerCase();
+
+    return contacts.filter((el) =>
+      el.name.toLowerCase().includes(normalizeFilter)
+    );
+  };
+
+  // onDeleteContact = (e) => {
+  //   console.log(e.currentTarget.parentNode, "par");
+  //   const { id } = e.currentTarget.parentNode;
+  //   console.log(id, "id");
+  //   this.setState((prevState) => ({
+  //     contacts: prevState.contacts.filter((el) => console.log(el, "el")),
+  //   }));
+  // };
+  onDeleteContact = (contactId) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter(
+        (contact) => contact.id !== contactId
+      ),
+      // console.log(contact)
+    }));
   };
 
   render() {
     const { name, number, filter } = this.state;
     return (
-      <div className={styles.container}>
-        <h1 className={styles.header}>Phonebook</h1>
+      <div className="container">
+        <h1 className="header">Phonebook</h1>
         <form onSubmit={this.onSaveData}>
           <label>
             Name
             <input
-              className={styles.input}
+              className="input"
               value={name}
               onChange={this.handleChange}
               id={uuidv4()}
               type="text"
               name="name"
+              data-action="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
               required
@@ -74,10 +98,12 @@ class Phonebook extends Component {
           <label>
             Number
             <input
+              className="input"
               onChange={this.handleChange}
               id={uuidv4()}
               value={number}
               type="tel"
+              data-action="number"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Номер телефона должен состоять из цифр, и может содержать пробелы, тире, круглые скобки, и может начинаться с +"
@@ -85,34 +111,35 @@ class Phonebook extends Component {
             />
           </label>
           <button
-            className={styles.Add}
+            className="addBtn"
             type="submit"
-            onClick={this.contactsData}
+            data-action="add"
+            onClick={this.toSaveContacts}
+            disabled={!number || !name}
           >
             Add contact
           </button>
         </form>
-
+        <label>
+          <h3>Find contacts by name</h3>
+          <input
+            type="text"
+            defaultValue={filter}
+            onChange={this.onFilterChange}
+          ></input>
+        </label>
         <div>
           <h2>Contacts</h2>
-          <label>
-            Find contacts by name
-            <input
-              type="text"
-              value={filter}
-              onChange={this.onFilterChange}
-            ></input>
-          </label>
           <ul>
             {this.state.contacts.map((el) => {
               return (
-                <li id={uuidv4()} key={uuidv4()} className={styles.contacts}>
+                <li id={uuidv4()} key={uuidv4()} className="contacts">
                   {el.name}
                   <span>: {el.number}</span>
                   <button
-                    id={uuidv4()}
-                    key={uuidv4()}
-                    onClick={this.deleteContact}
+                    // id={uuidv4()}
+                    // key={uuidv4()}
+                    onClick={this.onDeleteContact}
                   >
                     Delete
                   </button>
@@ -126,3 +153,15 @@ class Phonebook extends Component {
   }
 }
 export default Phonebook;
+// deleteContact = (e) => {
+//   const { contacts } = this.state;
+//   this.setState(() => {
+//     console.log(e.target.parentNode.name.textContent);
+//     // console.log(this.state.contacts);
+//     contacts.map((el) => {
+//       if (e.target.parentNode === el.name) {
+//         console.log(el.name, "name");
+//       }
+//     });
+//   });
+// };

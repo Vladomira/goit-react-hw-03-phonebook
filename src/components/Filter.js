@@ -1,24 +1,12 @@
-// import React, { Component } from "react";
 // import styles from "./Phonebook.module.css";
 
-// class Filter extends Component {
-//   onFilterChange = (e) => {
-//     this.setState({ filter: e.currentTarget.value });
-//   };
+const Filter = ({ filter, onChange }) => (
+  <div>
+    <label>
+      <h3>Find contacts by name</h3>
+      <input type="text" defaultValue={filter} onChange={onChange}></input>
+    </label>
+  </div>
+);
 
-//   render() {
-//     return (
-//       <div>
-//         <label>
-//           Find contacts by name
-//           <input
-//             type="text"
-//             value={filter}
-//             onChange={this.onFilterChange}
-//           ></input>
-//         </label>
-//       </div>
-//     );
-//   }
-// }
-// export default Filter;
+export default Filter;

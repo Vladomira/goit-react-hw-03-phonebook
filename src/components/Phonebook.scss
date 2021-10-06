@@ -1,14 +1,20 @@
 /* import styleshared  */
+body {
+  background-color: rgb(74, 165, 51);
+}
 .input {
   /* display: flex;
   margin-left: auto;
   margin-right: auto; */
   font-size: 20px;
-  margin-top: 50px;
+  margin: 30px 10px;
   width: 200px;
   height: 30px;
   padding: 10px 5px;
   background-color: rgb(190, 224, 190);
+}
+.header {
+  font-size: 40px;
 }
 .container {
   display: flex;
@@ -21,7 +27,7 @@
 /* .header {
   text-align: center;
 } */
-.Add {
+.addBtn {
   margin-top: 30px;
   width: 150px;
   height: 50px;

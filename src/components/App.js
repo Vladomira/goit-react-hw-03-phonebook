@@ -1,55 +1,57 @@
 import React, { Component } from "react";
 import Phonebook from "./Phonebook";
-// import Filter from "./Filter";
+import Filter from "./Filter";
+// import Contacts from "./Contacts";
 // const { v4: uuidv4 } = require("uuid");
 
 class App extends Component {
   state = {
     contacts: [],
-    name: "",
-    number: "",
     filter: "",
   };
   formSubmit = (data) => {
     // console.log(data, "dta");
-    // const contactsList = {
-    //  contacts: [{
-    //     id: uuidv4(),
-    //     name,
-    //     number,
-    //   }],
-    // };
-    // this.setState((prevState)=>{
-    //   contacts: [this.state.contacts, ...prevState.contacts,]
-    // })
   };
+
+  // handleFilterChange = (e) => {
+  //   const { name, value } = e.currentTarget;
+  //   this.setState({ [name]: value });
+
+  //   this.setState(() => {
+  //     this.state.contacts.map((el) => {
+  //       // console.log(value);
+  //       if (value === el.name) {
+  //         const render = <li>{el.name}</li>;
+  //         return render;
+  //       }
+  //     });
+  //   });
+  // };
+
   onFilterChange = (e) => {
     this.setState({ filter: e.currentTarget.value });
   };
-
   render() {
-    const normalizeFilter = this.state.filter.toLowerCase().trim();
-    const visibleContacts = this.state.contacts.filter((el) => {
-      return el.name.toLowerCase().trim().includes(normalizeFilter);
-    });
+    // const normalizeFilter = this.state.filter.toLowerCase();
+    // const visibleContacts = this.state.contacts.filter((el) =>
+    //   el.name.toLowerCase().includes(normalizeFilter)
+    // );
 
-    // const { filter } = this.state;
+    // const { filter, contacts } = this.state;
     return (
       <>
-        <Phonebook onSubmit={this.formSubmit} props={visibleContacts} />
-        {/* <Filter /> */}
-        {/* <label>
-          Find contacts by name
-          <input
-            type="text"
-            value={filter}
-            onChange={this.onFilterChange}
-          ></input>
-        </label> */}
+        <Filter
+        // props={visibleContacts}
+        // onChange={this.handleFilterChange}
+        // filter={filter}
+        />
+        <Phonebook
+          onSubmit={this.formSubmit}
+          // props={visibleContacts
+        />
+        {/* <Contacts contacts={contacts} /> */}
       </>
     );
   }
 }
 export default App;
-
-// export default App;
