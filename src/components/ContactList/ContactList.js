@@ -1,28 +1,30 @@
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-// import ContactItem from "./ContactItem";
-// const { v4: uuidv4 } = require("uuid");
+import ContactItem from "./ContactItem";
+const { v4: uuidv4 } = require("uuid");
 
 //////
 const ContactList = ({ contacts, onBtnDelete }) => (
   <>
     <ul>
-      {/* {contacts.map((el) => {
+      {contacts.map(({ name, number, id }) => {
         return (
           <ContactItem
-            name={el.name}
-            number={el.number}
+            key={uuidv4()}
+            name={name}
+            number={number}
+            id={id}
             deleteContact={onBtnDelete}
           />
         );
-      })} */}
+      })}
     </ul>
   </>
 );
 
 ContactList.protoTypes = {
-  // contacts: PropTypes.array.isRequired,
-  // onBtnDelete: PropTypes.func.isRequired,
+  contacts: PropTypes.array.isRequired,
+  onBtnDelete: PropTypes.func.isRequired,
 };
 export default ContactList;
 // =========

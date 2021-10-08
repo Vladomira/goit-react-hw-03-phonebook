@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 const { v4: uuidv4 } = require("uuid");
 
-const ContactItem = ({ name, number, deleteContact }) => {
+const ContactItem = ({ name, number, id, deleteContact }) => {
   return (
     <li id={uuidv4()} key={uuidv4} className="contacts">
       {name}
       <span>: {number}</span>
-      <button onClick={() => deleteContact()}>Delete</button>
+      <button onClick={() => deleteContact(id)}>Delete</button>
     </li>
   );
 };

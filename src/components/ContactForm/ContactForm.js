@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 // import "/Phonebook.scss";
-// import { parse as uuidParse } from "uuid";
 const { v4: uuidv4 } = require("uuid");
 class ContactForm extends Component {
   state = {
@@ -16,8 +15,8 @@ class ContactForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state); // отпарвка данных
-    // очищение формы
-    this.reset();
+
+    this.reset(); // очищение формы
   };
 
   reset = () => {
@@ -33,7 +32,7 @@ class ContactForm extends Component {
             Name
             <input
               className="input"
-              defaultValue={name}
+              value={name}
               onChange={this.handleChange}
               id={uuidv4()}
               type="text"
@@ -50,7 +49,7 @@ class ContactForm extends Component {
               className="input"
               onChange={this.handleChange}
               id={uuidv4()}
-              defaultValue={number}
+              value={number}
               type="tel"
               name="number"
               data-action="number"
@@ -59,13 +58,7 @@ class ContactForm extends Component {
               required
             />
           </label>
-          <button
-            className="addBtn"
-            type="submit"
-            // data-action="add"
-            // onClick={this.onSaveData}
-            disabled={!number || !name}
-          >
+          <button className="addBtn" type="submit" disabled={!number || !name}>
             Add contact
           </button>
         </form>
