@@ -6,13 +6,7 @@ const ContactItem = ({ name, number, deleteContact }) => {
     <li id={uuidv4()} key={uuidv4} className="contacts">
       {name}
       <span>: {number}</span>
-      <button
-        // id={uuidv4()}
-        // key={uuidv4()}
-        onClick={() => deleteContact()}
-      >
-        Delete
-      </button>
+      <button onClick={() => deleteContact()}>Delete</button>
     </li>
   );
 };

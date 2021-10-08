@@ -4,57 +4,36 @@ import React, { Component } from "react";
 const { v4: uuidv4 } = require("uuid");
 class ContactForm extends Component {
   state = {
-    contacts: [],
     name: "",
     number: "",
-    // filter: "",
   };
 
   handleChange = (e) => {
     const { name, value } = e.currentTarget;
-    this.setState(() => {
-      this.state.contacts.map((el) => {
-        if (value === el.name) {
-          return alert(`${value} is already in contacts`);
-        }
-      });
-    });
-    return this.setState({ [name]: value });
+    this.setState({ [name]: value });
   };
 
-  onSaveData = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state); // отпарвка данных
-    this.reset(); // очищение формы
+    // очищение формы
+    this.reset();
   };
 
   reset = () => {
     this.setState({ name: "", number: "" });
-  };
-  toSaveContacts = (e) => {
-    const { contacts, name, number } = this.state;
-
-    this.setState({
-      [contacts]: contacts.push({
-        id: uuidv4(),
-        name: name,
-        number: number,
-        // filter: "",
-      }),
-    });
   };
 
   render() {
     const { name, number } = this.state;
     return (
       <div className="container">
-        {/* <h1 className="header">Phonebook</h1> */}
-        <form onSubmit={this.onSaveData}>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Name
             <input
               className="input"
-              value={name}
+              defaultValue={name}
               onChange={this.handleChange}
               id={uuidv4()}
               type="text"
@@ -71,10 +50,10 @@ class ContactForm extends Component {
               className="input"
               onChange={this.handleChange}
               id={uuidv4()}
-              value={number}
+              defaultValue={number}
               type="tel"
-              data-action="number"
               name="number"
+              data-action="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Номер телефона должен состоять из цифр, и может содержать пробелы, тире, круглые скобки, и может начинаться с +"
               required
@@ -83,8 +62,8 @@ class ContactForm extends Component {
           <button
             className="addBtn"
             type="submit"
-            data-action="add"
-            onClick={this.props.onClick}
+            // data-action="add"
+            // onClick={this.onSaveData}
             disabled={!number || !name}
           >
             Add contact
@@ -95,3 +74,27 @@ class ContactForm extends Component {
   }
 }
 export default ContactForm;
+// toSaveContacts = (e) => {
+//   const { contacts, name, number } = this.state;
+
+//   this.setState({
+//     [contacts]: contacts.push({
+//       id: uuidv4(),
+//       name: name,
+//       number: number,
+//       // filter: "",
+//     }),
+//   });
+// };
+// +++++
+// handleChange = (e) => {
+//   const { name, value } = e.currentTarget;
+//   this.setState(() => {
+//   //   this.state.contacts.map((el) => {
+//   //     if (value === el.name) {
+//   //       return alert(`${value} is already in contacts`);
+//   //     }
+//   //   });
+//   // });
+//   return this.setState({ [name]: value })
+// };

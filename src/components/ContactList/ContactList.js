@@ -1,13 +1,13 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-import ContactItem from "./ContactItem";
+// import ContactItem from "./ContactItem";
 // const { v4: uuidv4 } = require("uuid");
 
 //////
 const ContactList = ({ contacts, onBtnDelete }) => (
   <>
     <ul>
-      {contacts.map((el) => {
+      {/* {contacts.map((el) => {
         return (
           <ContactItem
             name={el.name}
@@ -15,14 +15,14 @@ const ContactList = ({ contacts, onBtnDelete }) => (
             deleteContact={onBtnDelete}
           />
         );
-      })}
+      })} */}
     </ul>
   </>
 );
 
 ContactList.protoTypes = {
-  contacts: PropTypes.array.isRequired,
-  onBtnDelete: PropTypes.func.isRequired,
+  // contacts: PropTypes.array.isRequired,
+  // onBtnDelete: PropTypes.func.isRequired,
 };
 export default ContactList;
 // =========
