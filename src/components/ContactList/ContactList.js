@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 //////
 const ContactList = ({ contacts, onBtnDelete }) => (
   <>
-    <ul>
+    <ul className="contacts__list">
       {contacts.map(({ name, number, id }) => {
         return (
           <ContactItem

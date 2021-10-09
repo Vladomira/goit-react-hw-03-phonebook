@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import ContactForm from "./ContactForm/ContactForm";
 import Filter from "./Filter/Filter";
 import ContactList from "./ContactList/ContactList";
-import "../styles/Phonebook.scss";
+// import "./styles/index";
+import "../styles/Container.scss";
+import "../styles/Form.scss";
+import "../styles/ContactsList.scss";
+
 const { v4: uuidv4 } = require("uuid");
 
 class App extends Component {
@@ -19,8 +23,9 @@ class App extends Component {
   //пpинимает данные из формы, функция
   formSubmit = ({ name, number }) => {
     const { contacts } = this.state;
+
     contacts.map((el) => {
-      console.log(el.name, "el");
+      // console.log(el.name, "el");
       if (name === el.name) {
         return alert(`${name} is already in contacts`);
       }
@@ -33,12 +38,6 @@ class App extends Component {
         number: number,
       }),
     });
-    // contacts.map((el) => {
-    //   console.log(el.name, "el");
-    //   if (name === el.name) {
-    //     return alert(`${name} is already in contacts`);
-    //   }
-    // });
   };
   filterContacts = () => {
     const { contacts, filter } = this.state;
@@ -67,18 +66,30 @@ class App extends Component {
     const { filter } = this.state;
     const contactsData = this.filterContacts();
     return (
-      <>
+      <div className="container">
         <h1 className="header">Phonebook</h1>
         <ContactForm onSubmit={this.formSubmit} />
 
-        <h2 className="title">Contacts</h2>
+        <h2 className="contacts__title">Contacts</h2>
         <Filter value={this.onFilterChange} filter={filter} />
         <ContactList
           contacts={contactsData}
           onBtnDelete={this.onDeleteContact}
         />
-      </>
+      </div>
     );
   }
 }
 export default App;
+
+///
+// this.setState((prevState)=>{
+//   [contacts]= prevState.contacts, dataContacts ,
+// });
+// this.setState({
+//   [contacts]: contacts.push({
+//     id: uuidv4(),
+//     name: name,
+//     number: number,
+//   }),
+// });
