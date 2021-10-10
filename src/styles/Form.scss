@@ -25,6 +25,7 @@
 
     &:hover,
     &:focus {
+      background-color: #e2a499;
       border-color: #ac503f;
       outline: 2px solid #ac503f;
     }
@@ -38,8 +39,8 @@
     width: 200px;
     height: 60px;
     border-radius: 5px;
-    background-color: #da8f81;
-    color: #8d125a;
+    background-color: #8d125a;
+    color: #d3897c;
     font-size: 20px;
     font-weight: 500;
     transform: scale(1);
@@ -50,7 +51,7 @@
     &:hover,
     &:focus {
       transform: scale(1.1);
-      background-color: #8d125a;
+      background-color: rgb(172, 8, 71);
       color: #d3897c;
     }
   }

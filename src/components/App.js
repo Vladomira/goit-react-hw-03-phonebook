@@ -20,18 +20,15 @@ class App extends Component {
     filter: "",
   };
 
-  //пpинимает данные из формы, функция
+  //пpинимает данные из формы
   formSubmit = ({ name, number }) => {
     const { contacts } = this.state;
 
-    contacts.map((el) => {
-      // console.log(el.name, "el");
-      if (name === el.name) {
-        return alert(`${name} is already in contacts`);
-      }
-    });
-
-    this.setState({
+    if (contacts.map((el) => name === el.name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    return this.setState({
       [contacts]: contacts.push({
         id: uuidv4(),
         name: name,
@@ -39,6 +36,7 @@ class App extends Component {
       }),
     });
   };
+
   filterContacts = () => {
     const { contacts, filter } = this.state;
     const normalizeFilter = filter.toLowerCase();
@@ -81,15 +79,3 @@ class App extends Component {
   }
 }
 export default App;
-
-///
-// this.setState((prevState)=>{
-//   [contacts]= prevState.contacts, dataContacts ,
-// });
-// this.setState({
-//   [contacts]: contacts.push({
-//     id: uuidv4(),
-//     name: name,
-//     number: number,
-//   }),
-// });
