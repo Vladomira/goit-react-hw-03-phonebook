@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const ContactItem = ({ name, number, id, deleteContact }) => {
   return (
-    <li id={uuidv4()} key={uuidv4} className="contacts__item">
+    <li id={uuidv4()} key={id} className="contacts__item">
       {name}
       <span>: {number}</span>
       <button className="contacts__btn" onClick={() => deleteContact(id)}>
@@ -16,5 +16,7 @@ const ContactItem = ({ name, number, id, deleteContact }) => {
 ContactItem.protoTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  deleteContact: PropTypes.func.isRequired,
 };
 export default ContactItem;

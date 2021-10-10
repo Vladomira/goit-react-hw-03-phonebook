@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
-
 import ContactItem from "./ContactItem";
-const { v4: uuidv4 } = require("uuid");
 
 //////
 const ContactList = ({ contacts, onBtnDelete }) => (
@@ -10,7 +8,7 @@ const ContactList = ({ contacts, onBtnDelete }) => (
       {contacts.map(({ name, number, id }) => {
         return (
           <ContactItem
-            key={uuidv4()}
+            key={id}
             name={name}
             number={number}
             id={id}
@@ -23,7 +21,13 @@ const ContactList = ({ contacts, onBtnDelete }) => (
 );
 
 ContactList.protoTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.number.isRequired,
+    })
+  ),
   onBtnDelete: PropTypes.func.isRequired,
 };
 export default ContactList;

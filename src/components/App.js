@@ -79,30 +79,3 @@ class App extends Component {
   }
 }
 export default App;
-// if (contacts.map((el) => name == el.name)) {
-//   alert(`${name} is already in contacts`);
-//   return;
-// }
-// return this.setState({
-//   [contacts]: contacts.push({
-//     id: uuidv4(),
-//     name: name,
-//     number: number,
-//   }),
-// });
-// this.setState(
-//   contacts.map((el) => {
-//     if (name === el.name) {
-//       alert(`${name} is already in contacts`);
-//       return "";
-//     }
-//   })
-// );
-// +++
-// this.setState(
-//   contacts.map((el) => {
-//     if (name === el.name) {
-//       return alert(`${name} is already in contacts`);
-//     }
-//   })
-// );
