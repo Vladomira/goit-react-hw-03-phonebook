@@ -24,11 +24,11 @@ class App extends Component {
   formSubmit = ({ name, number }) => {
     const { contacts } = this.state;
 
-    if (contacts.map((el) => name === el.name)) {
+    if (contacts.find((el) => name === el.name)) {
       alert(`${name} is already in contacts`);
       return;
     }
-    return this.setState({
+    this.setState({
       [contacts]: contacts.push({
         id: uuidv4(),
         name: name,
@@ -36,6 +36,33 @@ class App extends Component {
       }),
     });
   };
+  // if (contacts.map((el) => name == el.name)) {
+  //   alert(`${name} is already in contacts`);
+  //   return;
+  // }
+  // return this.setState({
+  //   [contacts]: contacts.push({
+  //     id: uuidv4(),
+  //     name: name,
+  //     number: number,
+  //   }),
+  // });
+  // this.setState(
+  //   contacts.map((el) => {
+  //     if (name === el.name) {
+  //       alert(`${name} is already in contacts`);
+  //       return "";
+  //     }
+  //   })
+  // );
+  // +++
+  // this.setState(
+  //   contacts.map((el) => {
+  //     if (name === el.name) {
+  //       return alert(`${name} is already in contacts`);
+  //     }
+  //   })
+  // );
 
   filterContacts = () => {
     const { contacts, filter } = this.state;
