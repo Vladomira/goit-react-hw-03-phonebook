@@ -19,6 +19,25 @@ class App extends Component {
     ],
     filter: "",
   };
+  componentDidMount() {
+    const contacts = localStorage.getItem("contacts");
+    const parseContacts = JSON.parse(contacts);
+    //   console.log(parseContacts);
+    console.log("parseContacts", parseContacts);
+    if (parseContacts) {
+      // setTimeout(() => {
+      this.setState({ contacts: parseContacts });
+      // }, 2000);
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    // const { contacts } = this.state;
+    if (this.state.contacts !== prevState.contacts) {
+      // console.log("prevState.contacts", prevState.contacts);
+      // console.log("this.state.contacts", this.state.contacts);
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
 
   //пpинимает данные из формы
   formSubmit = ({ name, number }) => {
